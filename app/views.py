@@ -5,4 +5,4 @@ def home(request):
     return render(request, 'app/home.html')
 
 def prof_dashboard(request):
-    return render(request, 'app/pDash.html')
+    return render(request, 'app/prof-dashboard.html')
