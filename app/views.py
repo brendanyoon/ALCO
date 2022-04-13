@@ -4,5 +4,5 @@ from django.http import HttpResponse
 def home(request):
     return render(request, 'app/home.html')
 
-def profDashboard(request):
+def prof_dashboard(request):
     return render(request, 'app/pDash.html')
