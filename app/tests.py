@@ -6,7 +6,6 @@ from django.http import HttpRequest
 
 # Create your tests here.
 
-
 class HomePageTests(TestCase):
     def test_root_url_resolves_to_home_page_view(self):
         found = resolve('/')
@@ -18,6 +17,15 @@ class HomePageTests(TestCase):
         html = response.content.decode('utf8')
         self.assertTrue(html.startswith('<!DOCTYPE html>'))
         self.assertIn('<h1>ALCO RPG Login</h1>', html)
+        self.assertTrue(html.endswith('</html>'))
+
+    def test_student_professor_login_buttons_exists(self):
+        request = HttpRequest()
+        response = home(request)
+        html = response.content.decode('utf8')
+        self.assertTrue(html.startswith('<!DOCTYPE html>'))
+        self.assertIn('Student Login', html)
+        self.assertIn('Student Login', html)
         self.assertTrue(html.endswith('</html>'))
 
 
