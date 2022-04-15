@@ -13,4 +13,5 @@ def home(request):
 def prof_dashboard(request):
     return render(request, 'app/prof-dashboard.html')
 
-
+def student_dashboard(request):
+   return render(request, 'app/student-dashboard.html')
