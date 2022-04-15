@@ -35,3 +35,14 @@
   cursor: pointer;
   width: 100%;
 }
+
+#loginPage {
+  text-align: center;
+  padding-top: 10%;
+}
+
+#loginPage .btn {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+}

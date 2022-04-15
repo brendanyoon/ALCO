@@ -1,11 +1,11 @@
 from django.test import TestCase
 from app.views import home
 from app.views import prof_dashboard
+from app.views import student_dashboard
 from django.urls import resolve
 from django.http import HttpRequest
 
 # Create your tests here.
-
 
 class HomePageTests(TestCase):
     def test_root_url_resolves_to_home_page_view(self):
@@ -18,6 +18,15 @@ class HomePageTests(TestCase):
         html = response.content.decode('utf8')
         self.assertTrue(html.startswith('<!DOCTYPE html>'))
         self.assertIn('<h1>ALCO RPG Login</h1>', html)
+        self.assertTrue(html.endswith('</html>'))
+
+    def test_student_professor_login_buttons_exists(self):
+        request = HttpRequest()
+        response = home(request)
+        html = response.content.decode('utf8')
+        self.assertTrue(html.startswith('<!DOCTYPE html>'))
+        self.assertIn('Student Login', html)
+        self.assertIn('Student Login', html)
         self.assertTrue(html.endswith('</html>'))
 
 
@@ -42,3 +51,16 @@ class ProfDashboardTests(TestCase):
         self.assertIn('<button type="button" class="btn btn-primary">Assignments</button>', html)
         self.assertIn('<button type="button" class="btn btn-primary">Tests</button>', html)
 
+class StudentDashboardTests(TestCase):
+    def test_student_dashboard_resolves_to_correct_view(self):
+        found = resolve('/student-dashboard/')
+        self.assertEqual(found.func, student_dashboard)
+    def test_student_dashboard_navigation_links_exist(self):
+        request = HttpRequest()
+        response = student_dashboard(request)
+        html = response.content.decode('utf8')
+        self.assertIn('Quests', html)
+        self.assertIn('Stats', html)
+        self.assertIn('Course Info', html)
+        self.assertIn('Course Materials', html)
+        self.assertTrue(html.endswith('</html>'))
