@@ -1,6 +1,7 @@
 from django.test import TestCase
 from app.views import home
 from app.views import prof_dashboard
+from app.views import student_dashboard
 from django.urls import resolve
 from django.http import HttpRequest
 
@@ -50,3 +51,16 @@ class ProfDashboardTests(TestCase):
         self.assertIn('<button type="button" class="btn btn-primary">Assignments</button>', html)
         self.assertIn('<button type="button" class="btn btn-primary">Tests</button>', html)
 
+class StudentDashboardTests(TestCase):
+    def test_student_dashboard_resolves_to_correct_view(self):
+        found = resolve('/student-dashboard/')
+        self.assertEqual(found.func, student_dashboard)
+    def test_student_dashboard_navigation_links_exist(self):
+        request = HttpRequest()
+        response = student_dashboard(request)
+        html = response.content.decode('utf8')
+        self.assertIn('Quests', html)
+        self.assertIn('Stats', html)
+        self.assertIn('Course Info', html)
+        self.assertIn('Course Materials', html)
+        self.assertTrue(html.endswith('</html>'))
