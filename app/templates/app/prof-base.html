@@ -1,0 +1,22 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+
+<h1>Professor Dashboard</h1>
+
+<div class="left-box">
+    <a class="btn btn-primary" href="../prof-dashboard/" role="button">Home</a>
+    <button type="button" class="btn btn-primary" disabled>Assignments</button>
+    <button type="button" class="btn btn-primary" disabled>Tests</button>
+    <button type="button" class="btn btn-primary" disabled>Roster</button>
+    <a class="btn btn-primary" href="../prof-quizzes/" role="button">Quizzes</a>
+    <button type="button" class="btn btn-primary" disabled>Performance</button>
+    <a class="btn btn-primary" href="../prof-map/" role="button">Map</a>
+</div>
+
+<div class="right-box">
+    {% block prof-content %}
+    {% endblock %}
+</div>
+
+{% endblock content %}
