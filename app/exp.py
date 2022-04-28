@@ -41,6 +41,8 @@ class exp:
 		return (exp.__GetExpFromLevel(exp.GetLevel(xp)+1) - xp)
 
 	def ToNextLevelPercent(xp): #Calculates percentage of xp to next level. Used in student progress bar
+		if (exp.__BaseExpToNextLevel(xp) == 0): #stop before we div by zero
+			return 1.0
 		if (round(exp.ExpToNextLevel(xp) / exp.__BaseExpToNextLevel(xp), 3) == 1.0): #if percentage = 100% display 0%
 			return 0.0
 		return round(exp.ExpToNextLevel(xp) / exp.__BaseExpToNextLevel(xp), 3) #rounded to three decimal points
@@ -52,8 +54,8 @@ class exp:
 #		student.xp += assignment.xp
 #		return
 
-#example run
-xprn = 270
-print(exp.GetLevel(xprn))
-print(exp.ExpToNextLevel(xprn))
-print(exp.ToNextLevelPercent(xprn))
+#example
+#xprn = 700
+#print(exp.GetLevel(xprn))
+#print(exp.ExpToNextLevel(xprn))
+#print(exp.ToNextLevelPercent(xprn))
