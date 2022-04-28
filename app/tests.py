@@ -1,6 +1,7 @@
 from django.test import TestCase
 from app.views import home, prof_dashboard, student_dashboard
 from app.views import prof_quizzes, prof_map
+from app.exp import exp
 from django.urls import resolve
 from django.http import HttpRequest
 
@@ -90,3 +91,7 @@ class StudentDashboardTests(TestCase):
         self.assertIn('Course Info', html)
         self.assertIn('Course Materials', html)
         self.assertTrue(html.endswith('</html>'))
+
+class ExperienceBackEndTests():
+
+       

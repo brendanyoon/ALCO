@@ -6,7 +6,7 @@
 
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
-
+from app.exp import exp
 
 def home(request):
     return render(request, 'app/home.html')
@@ -30,6 +30,9 @@ def prof_quizzes(request):
 def prof_map(request):
     return render(request, 'app/prof-map.html')
 
-
 def student_dashboard(request):
     return render(request, 'app/student-dashboard.html')
+
+def student_stats(request):
+    exp = 5 #here, we would get exp from the database. Placeholder number for now
+    return render(request, 'app/student-stats.html')

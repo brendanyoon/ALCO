@@ -13,7 +13,7 @@
             </a>
             <ul class="nav-links">
                 <li><a href="#"><p>Quests</p></a></li>
-                <li><a href="#"><p>Stats</p></a></li>
+                <li><a href="../student-stats/"><p>Stats</p></a></li>
                 <li><a href="#"><p>Course Info</p></a></li>
                 <li><a href="#"><p>Course Materials</p></a></li>
                 <div class="active"></div>
@@ -21,6 +21,8 @@
         </div>
     <div class="col-6" >
         <div class = "container-fluid" id="right-box-id">
+            {% block student-content %}
+            {% endblock %}
         </div>
     </div>
 
