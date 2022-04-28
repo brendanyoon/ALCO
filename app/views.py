@@ -11,10 +11,8 @@ from app.exp import exp
 def home(request):
     return render(request, 'app/home.html')
 
-
 def prof_dashboard(request):
     return render(request, 'app/prof-dashboard.html')
-
 
 def prof_quizzes(request):
     context = {}
@@ -26,7 +24,6 @@ def prof_quizzes(request):
 
     return render(request, 'app/prof-quizzes.html', context)
 
-
 def prof_map(request):
     return render(request, 'app/prof-map.html')
 
@@ -34,5 +31,6 @@ def student_dashboard(request):
     return render(request, 'app/student-dashboard.html')
 
 def student_stats(request):
-    exp = 5 #here, we would get exp from the database. Placeholder number for now
+    xp = 5 #here, we would get exp from the database. Placeholder number for now
+
     return render(request, 'app/student-stats.html')
