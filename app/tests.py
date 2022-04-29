@@ -4,8 +4,8 @@ from app.views import prof_dashboard
 from app.views import student_dashboard
 from django.urls import resolve
 from django.http import HttpRequest
-
-# Create your tests here.
+from django.db import models
+from .models import Professor, Student, Quest, Obstacle, Multiple_Choice, Multiple_Answers
 
 class HomePageTests(TestCase):
     def test_root_url_resolves_to_home_page_view(self):
@@ -64,3 +64,23 @@ class StudentDashboardTests(TestCase):
         self.assertIn('Course Info', html)
         self.assertIn('Course Materials', html)
         self.assertTrue(html.endswith('</html>'))
+
+class ModelsTest(TestCase):
+    def test_prof_student_creation_db_retreival(self):
+        prof = Professor(professor_email='prof@umbc.edu', first_name='Prof', last_name='J')
+        student = Student(student_email='student@umbc.edu', first_name='Candy', last_name='Kuo', grade=90.001, exp_pts='0')
+        prof.save()
+        student.save()
+
+        assert(Professor.objects.get(professor_email='prof@umbc.edu') == prof)
+        assert(Student.objects.get(student_email='student@umbc.edu') == student)
+
+    def test_quest_creation(self):
+        prof = Professor(professor_email='prof@umbc.edu', first_name='Prof', last_name='J')
+        student = Student(student_email='student@umbc.edu', first_name='Candy', last_name='Kuo', grade=90.001, exp_pts='0')
+        prof.save()
+        student.save()
+
+        quest = Quest(title='New Quest', num_questions=5, total_exp=100, is_required=True)
+        quest.save()
+        assert(Quest.objects.get(title='New Quest') == quest)
