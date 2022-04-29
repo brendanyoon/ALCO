@@ -92,6 +92,33 @@ class StudentDashboardTests(TestCase):
         self.assertIn('Course Materials', html)
         self.assertTrue(html.endswith('</html>'))
 
-class ExperienceBackEndTests():
+class ExperienceBackEndTests(TestCase):
+    def test_min_experience(self):
+        xp = 0
+        self.assertEqual(exp.GetLevel(xp), 1)
+        self.assertEqual(exp.ExpToNextLevel(xp), 10)
+        self.assertEqual(exp.ToNextLevelPercent(xp), 0)
 
+    def test_max_experience(self):
+        xp = 1250000
+        self.assertEqual(exp.GetLevel(xp), 100)
+        self.assertEqual(exp.ExpToNextLevel(xp), 0)
+        self.assertEqual(exp.ToNextLevelPercent(xp), 1)
+
+    def test_experience_out_of_bounds(self):
+        xp = -1
+        self.assertEqual(exp.GetLevel(xp), False)
+        self.assertEqual(exp.ExpToNextLevel(xp), False)
+        self.assertEqual(exp.ToNextLevelPercent(xp), False)
+        xp = 10000000000000
+        self.assertEqual(exp.GetLevel(xp), False)
+        self.assertEqual(exp.ExpToNextLevel(xp), False)
+        self.assertEqual(exp.ToNextLevelPercent(xp), False)
+
+    def test_experience_normal_case(self):
+        xp = 1250000/2
+        self.assertEqual(exp.GetLevel(xp), 79)
+        self.assertEqual(exp.ExpToNextLevel(xp), 577500)
+        self.assertEqual(exp.ToNextLevelPercent(xp), 0.902)
+       
        
