@@ -5,13 +5,31 @@
 #from rest_framework import Response
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.core.files.storage import FileSystemStorage
+
 
 def home(request):
     return render(request, 'app/home.html')
 
+
 def prof_dashboard(request):
     return render(request, 'app/prof-dashboard.html')
 
+
+def prof_quizzes(request):
+    context = {}
+    if request.method == 'POST':
+        uploaded_file = request.FILES['document']
+        fs = FileSystemStorage()
+        name = fs.save(uploaded_file.name, uploaded_file)
+        context['url']= fs.url(name)
+
+    return render(request, 'app/prof-quizzes.html', context)
+
+
+def prof_map(request):
+    return render(request, 'app/prof-map.html')
+
+
 def student_dashboard(request):
-   return render(request, 'app/student-dashboard.html')
+    return render(request, 'app/student-dashboard.html')
