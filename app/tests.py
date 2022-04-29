@@ -116,9 +116,9 @@ class ExperienceBackEndTests(TestCase):
         self.assertEqual(exp.ToNextLevelPercent(xp), False)
 
     def test_experience_normal_case(self):
-        xp = 1250000/2
-        self.assertEqual(exp.GetLevel(xp), 79)
-        self.assertEqual(exp.ExpToNextLevel(xp), 577500)
-        self.assertEqual(exp.ToNextLevelPercent(xp), 0.902)
+        xp = 50
+        self.assertEqual(exp.GetLevel(xp), 3) # (50/5 * 4) ^ (1/3) = 3
+        self.assertEqual(exp.ExpToNextLevel(xp), 30) #80 (minimum total xp of next level) - 50 (current xp) = 30
+        self.assertEqual(exp.ToNextLevelPercent(xp), 0.348) #(46 [difference of minimum total xp of next level and current one] -30 [exp to next level] ) / 46 (see first 46) = .348
        
        

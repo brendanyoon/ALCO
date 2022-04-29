@@ -31,7 +31,7 @@ def student_dashboard(request):
     return render(request, 'app/student-dashboard.html')
 
 def student_stats(request):
-    xp = 125000 #Here, we would get exp from the database. Placeholder number for now
+    xp = 125999 #Here, we would get exp from the database. Placeholder number for now
     level = exp.GetLevel(xp)
     percent = exp.ToNextLevelPercent(xp) * 100
 
