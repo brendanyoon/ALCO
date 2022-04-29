@@ -76,17 +76,21 @@ class ProfDashboardTests(TestCase):
         self.assertIn('<h2>Map</h2>', html)
 
 
+
 class StudentDashboardTests(TestCase):
     def test_student_dashboard_resolves_to_correct_view(self):
         found = resolve('/student-dashboard/')
         self.assertEqual(found.func, student_dashboard)
 
-    def test_student_dashboard_navigation_links_exist(self):
+    def test_student_dashboard_buttons(self):
         request = HttpRequest()
         response = student_dashboard(request)
         html = response.content.decode('utf8')
-        self.assertIn('Quests', html)
-        self.assertIn('Stats', html)
-        self.assertIn('Course Info', html)
-        self.assertIn('Course Materials', html)
         self.assertTrue(html.endswith('</html>'))
+        self.assertIn('<span class="fs-4">Student Dashboard</span>', html)
+        self.assertIn('Home',html)
+        self.assertIn('Map', html)
+        self.assertIn('Tests', html)
+        self.assertIn('Assignments', html)
+        self.assertIn('Grades', html)
+        self.assertIn('<button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Quiz 1" data-bs-content="This quiz is the hardest quiz you will ever take in your life">Quiz 1 </button>', html)
