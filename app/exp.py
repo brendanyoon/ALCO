@@ -31,12 +31,13 @@ class exp:
 		   return 0
 		return round((math.pow(level, 3) * 5) / 4)
 
-	#Calculates the base amount of xp needed to get from one level to another
+		#Calculates the base amount of xp needed to get from one level to another
+		#Used by ToNextLevelPercent
 	def __BaseExpToNextLevel(xp):
 		if (xp == MAX_EXP):
 			return 0			#Max level has been reached
 		level = exp.GetLevel(xp)
-		return (exp.__GetMinExpLevel(level+1) - exp.__GetMinExpLevel(level))
+		return (exp.__GetMinExpLevel(level+1) - exp.__GetMinExpLevel(level)) #minimum xp of the next level - minimum xp of current level
 
 	#Gets level of user based on their xp
 	def GetLevel(xp):
@@ -59,14 +60,14 @@ class exp:
 		return (exp.__GetMinExpLevel(exp.GetLevel(xp)+1) - xp)
 
 	def ToNextLevelPercent(xp): #Calculates percentage of xp to next level. Used in student progress bar
-								#TODO FIX THIS CODE
 		if (exp.__ExpOOB(xp)):
 			return False
 		if (exp.ExpToNextLevel(xp) == 0): #stop before we div by zero
 			return 1.0
-		if ((round((exp.ExpToNextLevel(xp) / exp.__BaseExpToNextLevel(xp)), 3) == 1.0)): #if percentage = 100% display 0%
+		percent = round(1-(( exp.ExpToNextLevel(xp)) % exp.__BaseExpToNextLevel(xp)) / (exp.__BaseExpToNextLevel(xp)), 3) # (Exp to next level % base exp to next level) / base exp to next level
+		if (percent == 1.0): #if percentage = 100% display 0%, since 100% means we're already displaying the next level
 			return 0.0
-		return round(((exp.__BaseExpToNextLevel(xp)-exp.ExpToNextLevel(xp)) / exp.__BaseExpToNextLevel(xp)), 3) #rounded to three decimal points
+		return percent #rounded to three decimal points
 
 #	def GainExp(student, assignment):		#This code is commented out because it needs a student and assignment class.
 #		if (__ExpOverBounds(assignment.xp + student.xp)): #assignment class should handle xp gain modification
@@ -80,9 +81,10 @@ class exp:
 #	print("exp: " + str(x) + " = lvl: " + str(exp.GetLevel(x)))
 #for x in range(35):
 #	print("lvl: " + str(exp.GetLevel(x)) + " = exp: " + str(exp._exp__GetMinExpLevel(exp.GetLevel(x))))
-for x in range(1000):
-	print("lvl: " + str(exp.GetLevel(x)) + " = base exp to next level: " + str(exp._exp__BaseExpToNextLevel(x)))
-for x in range(1000):
-	print("exp: " + str(x) + " = exp to next level: " + str(exp.ExpToNextLevel(x)))
-for x in range(1000):
-	print("exp: " + str(x) + " = % to next level: " + str(exp.ToNextLevelPercent(x)))
+#for x in range(1000):
+#	print("lvl: " + str(exp.GetLevel(x)) + " = base exp to next level: " + str(exp.__BaseExpToNextLevel(x)))
+#for x in range(1000):
+#	print("exp: " + str(x) + " = exp to next level: " + str(exp.ExpToNextLevel(x)))
+#for x in range(1000):
+#	print("exp: " + str(x) + " = % to next level: " + str(exp.ToNextLevelPercent(x)))
+#

@@ -1,5 +1,6 @@
 from django.test import TestCase
 from app.views import home, prof_dashboard, student_dashboard
+from app.views import student_stats
 from app.views import prof_quizzes, prof_map
 from app.exp import exp
 from django.urls import resolve
@@ -76,7 +77,6 @@ class ProfDashboardTests(TestCase):
 
         self.assertIn('<h2>Map</h2>', html)
 
-
 class StudentDashboardTests(TestCase):
     def test_student_dashboard_resolves_to_correct_view(self):
         found = resolve('/student-dashboard/')
@@ -91,6 +91,11 @@ class StudentDashboardTests(TestCase):
         self.assertIn('Course Info', html)
         self.assertIn('Course Materials', html)
         self.assertTrue(html.endswith('</html>'))
+
+class ExperienceFrontEndTest(TestCase):
+    def test_student_experience_resolves_to_correct_view(self):
+        found = resolve('/student-stats/')
+        self.assertEqual(found.func, student_stats)
 
 class ExperienceBackEndTests(TestCase):
     def test_min_experience(self):
@@ -117,8 +122,7 @@ class ExperienceBackEndTests(TestCase):
 
     def test_experience_normal_case(self):
         xp = 50
-        self.assertEqual(exp.GetLevel(xp), 3) # (50/5 * 4) ^ (1/3) = 3
+        self.assertEqual(exp.GetLevel(xp), 3) # floor((50/5 * 4) ^ (1/3)) = 3
         self.assertEqual(exp.ExpToNextLevel(xp), 30) #80 (minimum total xp of next level) - 50 (current xp) = 30
-        self.assertEqual(exp.ToNextLevelPercent(xp), 0.348) #(46 [difference of minimum total xp of next level and current one] -30 [exp to next level] ) / 46 (see first 46) = .348
-       
+        self.assertEqual(exp.ToNextLevelPercent(xp), 0.348) # (30 [exp to next level] % 46 [base exp to next level] ) / 46 = .348
        
