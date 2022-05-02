@@ -1,6 +1,8 @@
 from django.test import TestCase
 from app.views import home, prof_dashboard, student_dashboard
+from app.views import student_stats
 from app.views import prof_quizzes, prof_map
+from app.exp import exp
 from django.urls import resolve
 from django.http import HttpRequest
 from django.db import models
@@ -75,8 +77,6 @@ class ProfDashboardTests(TestCase):
 
         self.assertIn('<h2>Map</h2>', html)
 
-
-
 class StudentDashboardTests(TestCase):
     def test_student_dashboard_resolves_to_correct_view(self):
         found = resolve('/student-dashboard/')
@@ -87,14 +87,52 @@ class StudentDashboardTests(TestCase):
         response = student_dashboard(request)
         html = response.content.decode('utf8')
         self.assertTrue(html.endswith('</html>'))
-        self.assertIn('<span class="fs-4">Student Dashboard</span>', html)
+        self.assertIn('Student Dashboard', html)
         self.assertIn('Home',html)
         self.assertIn('Map', html)
         self.assertIn('Tests', html)
         self.assertIn('Assignments', html)
-        self.assertIn('Grades', html)
-        self.assertIn('<button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Quiz 1" data-bs-content="This quiz is the hardest quiz you will ever take in your life">Quiz 1 </button>', html)
+        self.assertIn('Stats', html)
+        self.assertIn('This quiz is the hardest quiz you will ever take in your life', html)
 
+
+class ExperienceFrontEndTest(TestCase):
+    def test_student_experience_resolves_to_correct_view(self):
+        found = resolve('/student-stats/')
+        self.assertEqual(found.func, student_stats)
+
+class ExperienceBackEndTests(TestCase):
+    def test_min_experience(self):
+        xp = 0
+        self.assertEqual(exp.GetLevel(xp), 1)
+        self.assertEqual(exp.ExpToNextLevel(xp), 10)
+        self.assertEqual(exp.ToNextLevelPercent(xp), 0)
+
+    def test_max_experience(self):
+        xp = 1250000
+        self.assertEqual(exp.GetLevel(xp), 100)
+        self.assertEqual(exp.ExpToNextLevel(xp), 0)
+        self.assertEqual(exp.ToNextLevelPercent(xp), 1)
+
+    def test_experience_out_of_bounds(self):
+        xp = -1
+        self.assertEqual(exp.GetLevel(xp), False)
+        self.assertEqual(exp.ExpToNextLevel(xp), False)
+        self.assertEqual(exp.ToNextLevelPercent(xp), False)
+        xp = 10000000000000
+        self.assertEqual(exp.GetLevel(xp), False)
+        self.assertEqual(exp.ExpToNextLevel(xp), False)
+        self.assertEqual(exp.ToNextLevelPercent(xp), False)
+
+    def test_experience_normal_case(self):
+        request = HttpRequest()
+        response = student_dashboard(request)
+        html = response.content.decode('utf8')
+        xp = 50
+        self.assertEqual(exp.GetLevel(xp), 3) # floor((50/5 * 4) ^ (1/3)) = 3
+        self.assertEqual(exp.ExpToNextLevel(xp), 30) #80 (minimum total xp of next level) - 50 (current xp) = 30
+        self.assertEqual(exp.ToNextLevelPercent(xp), 0.348) # (30 [exp to next level] % 46 [base exp to next level] ) / 46 = .348
+       
 class ModelsTest(TestCase):
     def test_prof_student_creation_db_retreival(self):
         prof = Professor(professor_email='prof@umbc.edu', first_name='Prof', last_name='J')

@@ -55,6 +55,9 @@ atlassian-ide-plugin.xml
 *$py.class
 
 # Distribution / packaging
+.Python
+app/migrations
+build/
 .Python build/
 develop-eggs/
 dist/
@@ -88,6 +91,38 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+<<<<<<< HEAD
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Visual Studio stuff:
+*.vs
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+=======
+>>>>>>> 0b7ce5a15fc8710e8c99bf0fb7174d2146708f28
 
 # Jupyter Notebook
 .ipynb_checkpoints
