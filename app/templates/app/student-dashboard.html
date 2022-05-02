@@ -1,27 +1,85 @@
 ﻿{% extends "app/base.html" %}
 {% block content %}
-<!--<head>
-    <meta name="viewport" content="width=device-witdh, initial-scale=1.0">
-    <title>ALCO - Student Dashbaord</title>
-    <link rel="stylesheet" href="sd_style_sheet.css">
-</head>
--->
-        <div class="col-4" id="side-nav-id">
-            <a href="#" class="logo">
-                {% load static %}
-                <img src="{% static 'images/logo.png' %}" class="logo-img">
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap" />
+                </svg>
+                <span class="fs-4">Student Dashboard</span>
             </a>
-            <ul class="nav-links">
-                <li><a href="#"><p>Quests</p></a></li>
-                <li><a href="#"><p>Stats</p></a></li>
-                <li><a href="#"><p>Course Info</p></a></li>
-                <li><a href="#"><p>Course Materials</p></a></li>
-                <div class="active"></div>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" aria-current="page">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#home" />
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#speedometer2" />
+                        </svg>
+                        Map
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#table" />
+                        </svg>
+                        Tests
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#grid" />
+                        </svg>
+                        Assignments
+                    </a>
+                </li>
+                <li>
+                    <a href="../student-stats/" class="nav-link text-white">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#people-circle" />
+                        </svg>
+                        Stats
+                    </a>
+                </li>
             </ul>
+            <hr>
         </div>
-    <div class="col-6" >
-        <div class = "container-fluid" id="right-box-id">
+
+        <div class="col">
+            <div class="row">
+                <div class="container-fluid">
+                    {% block student-content %}
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="map-interface">
+                    <img src="https://2minutetabletop.com/wp-content/uploads/2020/02/Arvyre-Continent-Map-23x16-Base-Map.jpg"
+                        alt="map">
+                    <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Quiz 1"
+                        data-bs-content="This quiz is the hardest quiz you will ever take in your life">Quiz 1 </button>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+
+<script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
+</script>
 
 {% endblock content %}
