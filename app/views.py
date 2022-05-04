@@ -30,6 +30,15 @@ def prof_map(request):
 def student_dashboard(request):
     return render(request, 'app/student-dashboard.html')
 
+def student_map(request):
+    return render(request, 'app/student-map.html')
+
+def student_quest(request):
+    return render(request, 'app/student-quest.html')
+
+def prof_quest(request):
+    return render(request, 'app/prof-quest.html')
+
 def student_stats(request):
     xp = 125999 #Here, we would get exp from the database. Placeholder number for now
     level = exp.GetLevel(xp)

@@ -2,9 +2,6 @@
   min-height: 100vh;
 }
 
-html {
-}
-
 main {
   display: flex;
   flex-wrap: nowrap;
@@ -35,7 +32,7 @@ main {
 
 .map-interface{
   position: relative;
-  width: 50%;
+  width: 100%;
 }
 
 .map-interface img{
