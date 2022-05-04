@@ -1,27 +1,62 @@
 {% extends "app/base.html" %}
 
 {% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Vertical navbar -->
+        <div class="vertical-nav d-flex flex-column flex-shrink-0 p-3 text-white" id="sidebar"
+            style="width: 20%; height:100vh; background-color:#743A36;">
+            <div class="py-4 px-3 mb-4">
+                <div class="media d-flex align-items-center">
+                    <img src="" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm" style="margin-right:5px; padding-right:5px;">
+                    <div class="media-body">
+                        <h4 class="m-0 text-white">Prof</h4>
+                        <p class="font-weight-light text-white text-muted mb-0">CMSC 313</p>
+                    </div>
+                </div>
+            </div>
 
-<h1 style="font-family: Georgia">Professor Dashboard</h1>
+            <p class="text-gray font-weight-bold text-uppercase px-3 text-white small pb-4 mb-0">Main</p>
 
-<div class="left-box">
-    <div class="left-wrapper">
-        <a class="btn btn-primary" href="../prof-dashboard/" role="button">Home</a>
-        <a class="btn btn-primary" href="../prof-map/" role="button">Map</a>
-        <a class="btn btn-primary" href="../prof-quizzes/" role="button">Quizzes</a>
-        <br>
-        <a class="btn btn-primary" href="#" role="button">Assignments</a>
-        <a class="btn btn-primary" href="#" role="button">Tests</a>
-        <a class="btn btn-primary" href="#" role="button">Roster</a>
-        <a class="btn btn-primary" href="#" role="button">Performance</a>
+            <ul class="nav flex-column mb-0 text-white">
+                <li class="nav-item">
+                    <a href="{%url 'prof-dash'%}" class="nav-link text-white font-italic">
+                        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{%url 'prof-map'%}" class="nav-link text-white font-italic">
+                        <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                        Map
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{%url 'prof-quest'%}" class="nav-link text-white font-italic">
+                        <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+                        Quest Creation
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{%url 'prof-quizzes'%}" class="nav-link text-white font-italic">
+                        <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
+                        Image Upload
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col page-content" style="padding:5%;">
+            <div class="row">
+                <div class="container-fluid">
+                    {% block prof-content %}
+                    {% endblock %}
+                </div>
+            </div>
+            
+        </div>
     </div>
 </div>
 
-<div class="right-box">
-    <div class="right-wrapper">
-        {% block prof-content %}
-        {% endblock %}
-    </div>
-</div>
 
 {% endblock content %}
