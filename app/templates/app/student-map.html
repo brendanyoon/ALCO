@@ -1,0 +1,15 @@
+{% extends "app/student-dashboard.html" %}
+{% block student-content %}
+<div class="map-interface">
+    <img src="https://2minutetabletop.com/wp-content/uploads/2020/02/Arvyre-Continent-Map-23x16-Base-Map.jpg"
+         alt="map">
+    <a type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Quiz 1"
+       data-bs-content="This quiz is the hardest quiz you will ever take in your life">Quiz 1 </a>
+</div>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover();
+});
+
+</script>
+{% endblock student-content %}
