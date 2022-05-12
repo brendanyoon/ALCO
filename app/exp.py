@@ -74,16 +74,3 @@ class exp:
 		if (exp.__ExpOverBounds(studentxp + cquestxp)): #assignment class should handle xp gain modification
 			return MAX_EXP
 		return studentxp + cquestxp
-
-#example
-#for x in range(35):
-#	print("exp: " + str(x) + " = lvl: " + str(exp.GetLevel(x)))
-#for x in range(35):
-#	print("lvl: " + str(exp.GetLevel(x)) + " = exp: " + str(exp._exp__GetMinExpLevel(exp.GetLevel(x))))
-#for x in range(1000):
-#	print("lvl: " + str(exp.GetLevel(x)) + " = base exp to next level: " + str(exp.__BaseExpToNextLevel(x)))
-#for x in range(1000):
-#	print("exp: " + str(x) + " = exp to next level: " + str(exp.ExpToNextLevel(x)))
-#for x in range(1000):
-#	print("exp: " + str(x) + " = % to next level: " + str(exp.ToNextLevelPercent(x)))
-#
