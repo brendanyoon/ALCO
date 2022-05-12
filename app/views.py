@@ -9,6 +9,8 @@ from django.core.files.storage import FileSystemStorage
 from app.exp import exp
 from .models import Student, Completed_Quest
 
+global username
+
 def home(request):
     return render(request, 'app/home.html')
 
@@ -29,17 +31,24 @@ def prof_map(request):
     return render(request, 'app/prof-map.html')
 
 def student_dashboard(request):
-    student = Student.objects.get(student_email='xyz@umbc.edu')
-    name = student.first_name
-    return render(request, 'app/student-dashboard.html', context = {'name': name, 'level': exp.GetLevel(xp)})
+    global username
+    username = 'xyz@umbc.edu'
+    student = Student.objects.get(student_email = username)
+    name = student.first_name + ' ' + student.last_name
+    return render(request, 'app/student-dashboard.html', context = {'name': name, 'level': exp.GetLevel(student.exp_pts)})
 
 def student_map(request):
-    xp = 125999
-    return render(request, 'app/student-map.html', context = {'level': exp.GetLevel(xp)})
+    student = Student.objects.get(student_email=username)
+    name = student.first_name + ' ' + student.last_name
+    xp = student.exp_pts
+    return render(request, 'app/student-map.html', context = {'level': exp.GetLevel(xp), 'name': name})
 
 def student_quest(request):
-    xp = Student.exp()
-    context = { 'level': exp.GetLevel(xp) }
+    student = Student.objects.get(student_email=username)
+    name = student.first_name + " " + student.last_name
+    xp = student.exp_pts
+    context = { 'level': exp.GetLevel(xp),
+                'name': name }
     return render(request, 'app/student-quest.html', context = context)
 
 def prof_quest(request):
@@ -50,8 +59,10 @@ def student_stats(request):
     xp = student.exp_pts
     level = exp.GetLevel(xp)
     percent = round(exp.ToNextLevelPercent(xp) * 100, 2)
+    name = student.first_name + " " + student.last_name
 
     context = {
+        'name': name,
         'xp': xp,
         'level': level,
         'percent': str(percent)+"%",
