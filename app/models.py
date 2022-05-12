@@ -2,13 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 
-string_max_length:int = 250
+string_max_length: int = 250
 description_max_length: int = 700
+
 
 class Professor(models.Model):
     professor_email = models.EmailField(max_length=string_max_length, primary_key=True)
     first_name = models.CharField(max_length=string_max_length)
     last_name = models.CharField(max_length=string_max_length)
+
 
 class Student(models.Model):
     student_email = models.EmailField(max_length=string_max_length, primary_key=True)
@@ -16,6 +18,7 @@ class Student(models.Model):
     last_name = models.CharField(max_length=string_max_length)
     grade = models.DecimalField(max_digits=5, decimal_places=3)
     exp_pts = models.IntegerField()
+
 
 class Obstacle(models.Model):
     OBSTACLE_TYPES =[
@@ -36,11 +39,13 @@ class Multiple_Choice(Obstacle):
     answer = models.CharField(max_length=string_max_length)
     answer_choices_array = ArrayField(ArrayField(models.TextField(null=True, default='')))
 
+
 class Multiple_Answers(Obstacle):
     num_choices = models.IntegerField()
     num_answers = models.IntegerField()
     answers_array = ArrayField(ArrayField(models.TextField(null=True, default='')))
     answer_choices_array = ArrayField(ArrayField(models.TextField(null=True, default='')))
+
 
 class Quest(models.Model):
     title = models.CharField(max_length=string_max_length, primary_key=True)
@@ -49,6 +54,7 @@ class Quest(models.Model):
     obstacles_array = models.ManyToManyField(Obstacle)
     is_required = models.BooleanField()
 
+
 class Completed_Quest(models.Model):
     quest = models.ForeignKey(Quest, on_delete=models.DO_NOTHING)
     student = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
@@ -56,5 +62,11 @@ class Completed_Quest(models.Model):
     exp_earned = models.IntegerField()
 
 
-    
+class Quiz(models.Model):
+    quizName = models.CharField(max_length=string_max_length)
+    pdf = models.FileField(upload_to='quizzes/pdfs/')
+
+    def __str__(self):
+        return self.quizName
+
 

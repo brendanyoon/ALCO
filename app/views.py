@@ -24,6 +24,22 @@ def prof_quizzes(request):
 
     return render(request, 'app/prof-quizzes.html', context)
 
+
+# This function is currently not working -- something to troubleshoot
+def prof_quizzes2(request):
+    quizzes = Quiz.objects.all()
+    if request.method == 'POST':
+        form = QuizForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('prof_quizzes')
+    else:
+        form = QuizForm()
+    return render(request, 'app/prof-quizzes2.html', {
+        'form': form,
+        'quizzes': quizzes
+    })
+
 def prof_map(request):
     return render(request, 'app/prof-map.html')
 
