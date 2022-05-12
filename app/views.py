@@ -3,7 +3,7 @@
 #import time
 #from rest_framework import status
 #from rest_framework import Response
-
+from .forms import Quest_Creation_Form
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 from app.exp import exp
@@ -37,7 +37,18 @@ def student_quest(request):
     return render(request, 'app/student-quest.html')
 
 def prof_quest(request):
-    return render(request, 'app/prof-quest.html')
+    quest_create_form = Quest_Creation_Form()
+    if request.method == "POST":
+        quest_create_form = Quest_Creation_Form(request.POST)
+
+        if quest_create_form.is_valid():
+            quest = quest_create_form.save()
+            quest.save()
+        
+    else:
+        quest_create_form = Quest_Creation_Form()  
+
+    return render(request, 'app/prof-quest.html', {'quest_create_form': quest_create_form})
 
 def student_stats(request):
     xp = 125999 #Here, we would get exp from the database. Placeholder number for now
@@ -52,3 +63,4 @@ def student_stats(request):
     }
 
     return render(request, 'app/student-stats.html', context=context)
+
