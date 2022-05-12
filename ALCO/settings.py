@@ -79,8 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'ALCO_db',
-        'USER': '',
-        'PASSWORD': '',
+        'USER': 'ja51650@umbc.edu',
+        'PASSWORD': 'Ataack^24',
         'HOST': 'localhost',
         'PORT': '5432',
         'TEST': {

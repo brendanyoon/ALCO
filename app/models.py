@@ -15,7 +15,10 @@ class Student(models.Model):
     first_name = models.CharField(max_length=string_max_length)
     last_name = models.CharField(max_length=string_max_length)
     grade = models.DecimalField(max_digits=5, decimal_places=3)
-    exp_pts = models.IntegerField()
+    exp_pts = models.IntegerField(default = 0)
+
+    def exp(self):
+        return int("" + self.exp_pts)
 
 class Obstacle(models.Model):
     OBSTACLE_TYPES =[

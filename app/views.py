@@ -7,6 +7,7 @@
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 from app.exp import exp
+from .models import Student, Completed_Quest
 
 def home(request):
     return render(request, 'app/home.html')
@@ -28,19 +29,25 @@ def prof_map(request):
     return render(request, 'app/prof-map.html')
 
 def student_dashboard(request):
-    return render(request, 'app/student-dashboard.html')
+    student = Student.objects.get(student_email='xyz@umbc.edu')
+    name = student.first_name
+    return render(request, 'app/student-dashboard.html', context = {'name': name, 'level': exp.GetLevel(xp)})
 
 def student_map(request):
-    return render(request, 'app/student-map.html')
+    xp = 125999
+    return render(request, 'app/student-map.html', context = {'level': exp.GetLevel(xp)})
 
 def student_quest(request):
-    return render(request, 'app/student-quest.html')
+    xp = Student.exp()
+    context = { 'level': exp.GetLevel(xp) }
+    return render(request, 'app/student-quest.html', context = context)
 
 def prof_quest(request):
     return render(request, 'app/prof-quest.html')
 
 def student_stats(request):
-    xp = 125999 #Here, we would get exp from the database. Placeholder number for now
+    student = Student.objects.get(student_email='xyz@umbc.edu')
+    xp = student.exp_pts
     level = exp.GetLevel(xp)
     percent = round(exp.ToNextLevelPercent(xp) * 100, 2)
 
