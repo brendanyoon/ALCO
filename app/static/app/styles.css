@@ -124,3 +124,36 @@
   padding-bottom: 20px;
   margin-top: 20px;
 }
+.carousel-item {
+    height: 50%;
+}
+
+.carousel-indicators button {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: black;
+}
+
+.carousel-indicators li.active {
+    background-color: var(--primary);
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+}
+
+.carousel-indicators {
+    color: black;
+    bottom: -50px;
+    border-radius: 100%;
+
+}
+
+.carousel-control.left .glyphicon {
+    left: 0;
+    margin-left: 0;
+}
+.carousel-control.right .glyphicon {
+    right: 0;
+    margin-right: 0;
+}
