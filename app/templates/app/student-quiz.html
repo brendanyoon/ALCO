@@ -1,10 +1,8 @@
-{% extends "app/student-dashboard.html" %}
-{% block student-content %}
+{% extends "app/base.html" %}
+{% block content %}
 Quiz gets displayed
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<h1>What is 9 + 10</h1>
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -15,26 +13,29 @@ Quiz gets displayed
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-      <img src="https://www.openaccessgovernment.org/wp-content/uploads/2018/11/dreamstime_s_74844293.jpg" alt="Chania">
+      <img class="d-block w-100" src="..." alt="First Answer">
       <div class="carousel-caption">
-        <h3>Los Angeles</h3>
-        <p>LA is always so much fun!</p>
+        <h3>21</h3>
+        <p>This one is probably correct</p>
+        <a class="btn btn-primary" href="#" role="button">Select Answer</a>
       </div>
     </div>
 
     <div class="item">
-      <img src="https://www.state.gov/wp-content/uploads/2019/03/shutterstock_322199879-e1553865008177.jpg" alt="Chicago">
+      <img class="d-block w-100" src="..." alt="Second Answer">
       <div class="carousel-caption">
-        <h3>Chicago</h3>
-        <p>Thank you, Chicago!</p>
+        <h3>19</h3>
+        <p>This one is wrong</p>
+        <a class="btn btn-primary" href="#" role="button">Select Answer</a>
       </div>
     </div>
 
     <div class="item">
-      <img src="https://goodera.com/wp-content/uploads/2019/10/environmental-risks.jpg" alt="New York">
+      <img class="d-block w-100" src="..." alt="Third Answer">
       <div class="carousel-caption">
-        <h3>New York</h3>
-        <p>We love the Big Apple!</p>
+        <h3>910</h3>
+        <p>hmm</p>
+        <a class="btn btn-primary" href="#" role="button">Select Answer</a>
       </div>
     </div>
   </div>
@@ -49,4 +50,8 @@ Quiz gets displayed
     <span class="sr-only">Next</span>
   </a>
 </div>
-{% endblock student-content %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+{% endblock content %}
