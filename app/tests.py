@@ -150,3 +150,5 @@ class ModelsTest(TestCase):
         quest.save()
         assert(Quest.objects.get(title='New Quest') == quest)
         
+    def sample_question(self):
+        num_questions = Multiple_Choice(num_choices)

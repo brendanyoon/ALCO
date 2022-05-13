@@ -37,7 +37,7 @@ class Obstacle(models.Model):
 
 class Multiple_Choice(Obstacle):
     num_choices = models.IntegerField()
-    answer = models.TextField()
+    answer = models.CharField(max_length=200)
     answer_choices_array = models.ManyToManyField(Choice)
 
 class Multiple_Answers(Obstacle):

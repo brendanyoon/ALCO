@@ -3,7 +3,7 @@
 #import time
 #from rest_framework import status
 #from rest_framework import Response
-from .forms import Quest_Creation_Form
+from .forms import Quest_Creation_Form, Question_Form_Student
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 from app.exp import exp
@@ -34,7 +34,8 @@ def student_map(request):
     return render(request, 'app/student-map.html')
 
 def student_quest(request):
-    return render(request, 'app/student-quest.html')
+    question_form_student = Question_Form_Student()
+    return render(request, 'app/student-quest.html', {'question_form_student': question_form_student})
 
 def prof_quest(request):
     quest_create_form = Quest_Creation_Form()
