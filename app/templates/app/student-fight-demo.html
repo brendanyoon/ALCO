@@ -1,0 +1,101 @@
+{% extends "app/student-dashboard.html" %}
+{% block student-content %}
+<!-- red container div -->
+    <div style="position: relative; display: inline-block; border: solid 1px black;">
+        <!-- smaller red div -->
+        <div style="
+            position: absolute;
+            display: flex;
+            width: 100%;
+            align-items: center;
+            padding: 20px"
+        >
+            <!-- player health -->
+            <div style="position: relative; height: 30px; width: 100%; display: flex; justify-content: flex-end;">
+                <div
+                style="
+                    background-color: yellow;
+                    height: 30px;
+                    width: 100%;
+                "
+                ></div>
+                <div id="playerHealth"
+                style="
+                    position: absolute;
+                    background: blue;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: 100%;
+                "
+                ></div>
+            </div>
+
+            <!-- timer -->
+            <div
+            id="timer"
+            style="
+                background-color: red;
+                height: 100px;
+                width: 100px;
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            "
+            > 60
+            </div>
+
+            <!-- enemy health -->
+            <div style="position: relative; height: 30px; width: 100%;">
+                <div
+                style="
+                    background-color: yellow;
+                    height: 30px;
+                "
+                ></div>
+                <div id="enemyHealth"
+                style="
+                    position: absolute;
+                    background: blue;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                "
+                ></div>
+            </div>
+        </div>
+
+        <div id="displayText"
+        style="
+            position: absolute;
+            color: black;
+            align-items: center;
+            justify-content: center;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            display: none
+        "
+        >Tie</div>
+
+        <canvas>
+
+        </canvas>
+    </div>
+
+{% load static %}
+<script src="{% static 'app/student-fight-demo.js' %}"></script>
+
+{% endblock student-content %}
+
+
+
+<!--    {% load static %}-->
+
+<!--    <script type="text/javascript" src="{% static 'app/utils.js' %}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'app/classes.js' %}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'app/student-fight-demo.js' %}"></script>-->
+
