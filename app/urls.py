@@ -11,6 +11,7 @@ urlpatterns = [
     path('prof-quest/', views.prof_quest, name='prof-quest'),
     path('student-stats/', views.student_stats, name='student-stats'),
     path('student-map/', views.student_map, name='student-map'),
-    path('student-quest/', views.student_quest, name='student-quest')
+    path('student-quest/', views.student_quest, name='student-quest'),
+    path('student-fight/', views.student_fight, name='student-fight')
 ]
 

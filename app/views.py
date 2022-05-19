@@ -68,3 +68,7 @@ def student_stats(request):
     }
 
     return render(request, 'app/student-stats.html', context=context)
+
+
+def student_fight(request):
+    return render(request, 'app/student-fight-demo.html')
