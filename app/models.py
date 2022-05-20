@@ -18,7 +18,10 @@ class Student(models.Model):
     exp_pts = models.IntegerField(default = 0)
 
     def exp(self):
-        return int("" + self.exp_pts)
+        return int(self.exp_pts)
+
+    def fname(self):
+        return str(self.first_name)
 
 class Obstacle(models.Model):
     OBSTACLE_TYPES =[

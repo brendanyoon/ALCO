@@ -30,16 +30,22 @@ def prof_map(request):
 
 def student_dashboard(request):
     student = Student.objects.get(student_email='xyz@umbc.edu')
-    name = student.first_name
+    xp = student.exp()
+    name = student.fname()
     return render(request, 'app/student-dashboard.html', context = {'name': name, 'level': exp.GetLevel(xp)})
 
 def student_map(request):
-    xp = 125999
-    return render(request, 'app/student-map.html', context = {'level': exp.GetLevel(xp)})
+    student = Student.objects.get(student_email='xyz@umbc.edu')
+    xp = student.exp()
+    name = student.fname()
+    return render(request, 'app/student-map.html', context = {'name': name, 'level': exp.GetLevel(xp)})
 
 def student_quest(request):
-    xp = Student.exp()
-    context = { 'level': exp.GetLevel(xp) }
+    student = Student.objects.get(student_email='xyz@umbc.edu')
+    xp = student.exp()
+    name = student.fname()
+    context = { 'name': name,
+               'level': exp.GetLevel(xp) }
     return render(request, 'app/student-quest.html', context = context)
 
 def prof_quest(request):
@@ -47,11 +53,14 @@ def prof_quest(request):
 
 def student_stats(request):
     student = Student.objects.get(student_email='xyz@umbc.edu')
-    xp = student.exp_pts
+    name = student.fname()
+    xp = student.exp()
+    #xp = exp.GainExp(xp, assignmentxp)
     level = exp.GetLevel(xp)
     percent = round(exp.ToNextLevelPercent(xp) * 100, 2)
 
     context = {
+        'name': name,
         'xp': xp,
         'level': level,
         'percent': str(percent)+"%",
