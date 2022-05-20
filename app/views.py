@@ -1,8 +1,3 @@
-#imports from Django rest_framework
-#import requests
-#import time
-#from rest_framework import status
-#from rest_framework import Response
 from .forms import Quest_Creation_Form, Question_Form_Student
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage

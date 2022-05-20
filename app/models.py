@@ -17,10 +17,10 @@ class Student(models.Model):
     grade = models.DecimalField(max_digits=5, decimal_places=3)
     exp_pts = models.IntegerField()
 
-class Choice(models.Model):
-    choice_id = models.CharField(max_length=string_max_length)
-    choice_desc = models.TextField()
-    exp = models.IntegerField()
+# class Choice(models.Model):
+#     choice_id = models.CharField(max_length=string_max_length)
+#     choice_desc = models.TextField()
+#     exp = models.IntegerField()
 
 class Obstacle(models.Model):
     class ALL_OBSTACLE_TYPES(models.TextChoices):
@@ -31,20 +31,23 @@ class Obstacle(models.Model):
     obstacle_id = models.CharField(max_length=string_max_length, primary_key=True)
     description = models.TextField()
     num_images = models.IntegerField()
-    image_src_array = ArrayField(ArrayField(models.ImageField(upload_to='app/static/images')))
+    image1 = models.ImageField(upload_to='answers')
+    image2 = models.ImageField(upload_to='answers')
+    image3 = models.ImageField(upload_to='answers')
+    image4 = models.ImageField(upload_to='answers')
     obstacle_type = models.CharField(max_length=string_max_length, choices=ALL_OBSTACLE_TYPES.choices, default=ALL_OBSTACLE_TYPES.MULTIPLE_CHOICE)
 
 
 class Multiple_Choice(Obstacle):
     num_choices = models.IntegerField()
     answer = models.CharField(max_length=200)
-    answer_choices_array = models.ManyToManyField(Choice)
+    # answer_choices_array = models.ManyToManyField(Choice)
 
 class Multiple_Answers(Obstacle):
     num_choices = models.IntegerField()
     num_answers = models.IntegerField()
     answers_array = ArrayField(ArrayField(models.IntegerField()))
-    answer_choices_array = models.ManyToManyField(Choice)
+    # answer_choices_array = models.ManyToManyField(Choice)
 
 class Quest(models.Model):
     title = models.CharField(max_length=string_max_length, primary_key=True)
