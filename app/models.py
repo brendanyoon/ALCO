@@ -22,22 +22,25 @@ class Student(models.Model):
     def exp(self):
         return int(self.exp_pts)
 
+    def fname(self):
+        return str(self.first_name)
+
 
 class Obstacle(models.Model):
-    OBSTACLE_TYPES =[
-        'Multiple_Choice',
-        'Multiple_Answers',
-        'Fill_In_The_Blank'
-    ]
+    class ALL_OBSTACLE_TYPES(models.TextChoices):
+        MULTIPLE_CHOICE = 'Multiple_Choice',
+        MULTIPLE_ANSWERS = 'Multiple_Answers',
+        FILL_IN_BLANK = 'Fill_In_The_Blank'
 
     obstacle_id = models.CharField(max_length=string_max_length, primary_key=True)
     description = models.TextField()
     num_images = models.IntegerField()
-    image1 = models.ImageField(upload_to='app/static/images')
-    image2 = models.ImageField(upload_to='app/static/images')
-    image3 = models.ImageField(upload_to='app/static/images')
-    image4 = models.ImageField(upload_to='app/static/images')
-    obstacle_type = OBSTACLE_TYPES
+    image1 = models.ImageField(upload_to='answers')
+    image2 = models.ImageField(upload_to='answers')
+    image3 = models.ImageField(upload_to='answers')
+    image4 = models.ImageField(upload_to='answers')
+    obstacle_type = models.CharField(max_length=string_max_length, choices=ALL_OBSTACLE_TYPES.choices, default=ALL_OBSTACLE_TYPES.MULTIPLE_CHOICE)
+
 
 
 class Multiple_Choice(Obstacle):

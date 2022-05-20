@@ -47,19 +47,22 @@ def prof_map(request):
 
 def student_dashboard(request):
     student = Student.objects.get(student_email='xyz@umbc.edu')
-    name = student.first_name
+    name = student.fname()
     xp = student.exp()
     return render(request, 'app/student-dashboard.html', context={'name': name, 'level': exp.GetLevel(xp)})
 
 def student_map(request):
-    xp = 125999
-    return render(request, 'app/student-map.html', context={'level': exp.GetLevel(xp)})
+    student = Student.objects.get(student_email='xyz@umbc.edu')
+    name = student.fname()
+    xp = student.exp()
+    return render(request, 'app/student-map.html', context={'level': exp.GetLevel(xp), 'name': name})
 
 def student_quest(request):
     student = Student.objects.get(student_email='xyz@umbc.edu')
+    name = student.fname()
     xp = student.exp()
     question_form_student = Question_Form_Student()
-    context = {'level': exp.GetLevel(xp), 'question_form_student': question_form_student}
+    context = {'level': exp.GetLevel(xp), 'question_form_student': question_form_student, 'name': name}
 
     return render(request, 'app/student-quest.html', context=context)
 
@@ -68,6 +71,7 @@ def prof_quest(request):
 
 def student_stats(request):
     student = Student.objects.get(student_email='xyz@umbc.edu')
+    name = student.fname()
     xp = student.exp_pts
     level = exp.GetLevel(xp)
     percent = round(exp.ToNextLevelPercent(xp) * 100, 2)
@@ -76,11 +80,19 @@ def student_stats(request):
         'xp': xp,
         'level': level,
         'percent': str(percent)+"%",
-        'ariapercent': str(percent)
+        'ariapercent': str(percent),
+        'name': name
     }
 
     return render(request, 'app/student-stats.html', context=context)
 
 
 def student_fight(request):
-    return render(request, 'app/student-fight-demo.html')
+    student = Student.objects.get(student_email='xyz@umbc.edu')
+    name = student.fname()
+    xp = student.exp_pts
+    context = {
+        'name': name,
+        'level': exp.GetLevel(xp)
+    }
+    return render(request, 'app/student-fight-demo.html', context=context)
