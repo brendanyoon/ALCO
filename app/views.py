@@ -25,7 +25,7 @@ def prof_quizzes(request):
     return render(request, 'app/prof-quizzes.html', context)
 
 
-# This function is currently not working -- something to troubleshoot
+# This function is currently not working -- something to troubleshoot in a future iteration
 def prof_quizzes2(request):
     quizzes = Quiz.objects.all()
     if request.method == 'POST':
