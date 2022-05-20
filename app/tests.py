@@ -21,6 +21,7 @@ class HomePageTests(TestCase):
         self.assertTrue(html.startswith('<!DOCTYPE html>'))
         self.assertIn('<h1>ALCO RPG Login</h1>', html)
         self.assertTrue(html.endswith('</html>'))
+        
 
     def test_student_professor_login_buttons_exists(self):
         request = HttpRequest()
@@ -91,7 +92,6 @@ class StudentDashboardTests(TestCase):
         self.assertIn('Map', html)
         self.assertIn('Quest List', html)
         self.assertIn('Stats', html)
-
 
 class ExperienceFrontEndTest(TestCase):
     def test_student_experience_resolves_to_correct_view(self):

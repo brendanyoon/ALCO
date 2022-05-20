@@ -1,0 +1,23 @@
+{% extends "app/prof-base.html" %}
+
+{% block prof-content %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<h5>Obstacle Creation:</h5>
+			<hr>
+			<form action="" method="POST">
+				{% csrf_token %}
+                {{ obstacle_create_form | crispy }}
+
+				<button type="submit" href="{% url 'quest' quest.title %}" class="save btn btn-primary">Save</button>
+            </form>
+
+		</div>
+	</div>
+
+</div>
+
+{% endblock prof-content %}
