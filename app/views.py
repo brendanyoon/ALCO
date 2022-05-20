@@ -60,8 +60,8 @@ def student_stats(request):
     percent = round(exp.ToNextLevelPercent(xp) * 100, 2)
 
     context = {
-        'name': name,
         'xp': xp,
+        'name': name,
         'level': level,
         'percent': str(percent)+"%",
         'ariapercent': str(percent)
