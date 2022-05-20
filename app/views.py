@@ -72,7 +72,7 @@ def prof_quest(request):
 def student_stats(request):
     student = Student.objects.get(student_email='xyz@umbc.edu')
     name = student.fname()
-    xp = student.exp_pts
+    xp = student.exp()
     level = exp.GetLevel(xp)
     percent = round(exp.ToNextLevelPercent(xp) * 100, 2)
 
@@ -90,7 +90,7 @@ def student_stats(request):
 def student_fight(request):
     student = Student.objects.get(student_email='xyz@umbc.edu')
     name = student.fname()
-    xp = student.exp_pts
+    xp = student.exp()
     context = {
         'name': name,
         'level': exp.GetLevel(xp)
