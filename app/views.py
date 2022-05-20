@@ -7,6 +7,8 @@
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 from app.exp import exp
+from .models import Student, Completed_Quest
+from .forms import Question_Form_Student
 
 def home(request):
     return render(request, 'app/home.html')
@@ -20,7 +22,7 @@ def prof_quizzes(request):
         uploaded_file = request.FILES['document']
         fs = FileSystemStorage()
         name = fs.save(uploaded_file.name, uploaded_file)
-        context['url']= fs.url(name)
+        context['url'] = fs.url(name)
 
     return render(request, 'app/prof-quizzes.html', context)
 
@@ -44,19 +46,29 @@ def prof_map(request):
     return render(request, 'app/prof-map.html')
 
 def student_dashboard(request):
-    return render(request, 'app/student-dashboard.html')
+    student = Student.objects.get(student_email='xyz@umbc.edu')
+    name = student.first_name
+    xp = student.exp()
+    return render(request, 'app/student-dashboard.html', context={'name': name, 'level': exp.GetLevel(xp)})
 
 def student_map(request):
-    return render(request, 'app/student-map.html')
+    xp = 125999
+    return render(request, 'app/student-map.html', context={'level': exp.GetLevel(xp)})
 
 def student_quest(request):
-    return render(request, 'app/student-quest.html')
+    student = Student.objects.get(student_email='xyz@umbc.edu')
+    xp = student.exp()
+    question_form_student = Question_Form_Student()
+    context = {'level': exp.GetLevel(xp), 'question_form_student': question_form_student}
+
+    return render(request, 'app/student-quest.html', context=context)
 
 def prof_quest(request):
     return render(request, 'app/prof-quest.html')
 
 def student_stats(request):
-    xp = 125999 #Here, we would get exp from the database. Placeholder number for now
+    student = Student.objects.get(student_email='xyz@umbc.edu')
+    xp = student.exp_pts
     level = exp.GetLevel(xp)
     percent = round(exp.ToNextLevelPercent(xp) * 100, 2)
 

@@ -17,7 +17,10 @@ class Student(models.Model):
     first_name = models.CharField(max_length=string_max_length)
     last_name = models.CharField(max_length=string_max_length)
     grade = models.DecimalField(max_digits=5, decimal_places=3)
-    exp_pts = models.IntegerField()
+    exp_pts = models.IntegerField(default=0)
+
+    def exp(self):
+        return int(self.exp_pts)
 
 
 class Obstacle(models.Model):
@@ -30,21 +33,24 @@ class Obstacle(models.Model):
     obstacle_id = models.CharField(max_length=string_max_length, primary_key=True)
     description = models.TextField()
     num_images = models.IntegerField()
-    image_src_array = ArrayField(ArrayField(models.ImageField(upload_to='app/static/images')))
+    image1 = models.ImageField(upload_to='app/static/images')
+    image2 = models.ImageField(upload_to='app/static/images')
+    image3 = models.ImageField(upload_to='app/static/images')
+    image4 = models.ImageField(upload_to='app/static/images')
     obstacle_type = OBSTACLE_TYPES
 
 
 class Multiple_Choice(Obstacle):
     num_choices = models.IntegerField()
     answer = models.CharField(max_length=string_max_length)
-    answer_choices_array = ArrayField(ArrayField(models.TextField(null=True, default='')))
+    # answer_choices_array = ArrayField(ArrayField(models.TextField(null=True, default='{choice}')), default='{choice}')
 
 
 class Multiple_Answers(Obstacle):
     num_choices = models.IntegerField()
     num_answers = models.IntegerField()
-    answers_array = ArrayField(ArrayField(models.TextField(null=True, default='')))
-    answer_choices_array = ArrayField(ArrayField(models.TextField(null=True, default='')))
+    # answers_array = ArrayField(ArrayField(models.TextField(null=True, default='')), default='{choice}')
+    # answer_choices_array = ArrayField(ArrayField(models.TextField(null=True, default='{choice}')), default='{choice}')
 
 
 class Quest(models.Model):
@@ -62,6 +68,7 @@ class Completed_Quest(models.Model):
     exp_earned = models.IntegerField()
 
 
+# Nonfunctioning Quiz model - to be updated for displaying quizzes in prof-quizzes.html
 class Quiz(models.Model):
     quizName = models.CharField(max_length=string_max_length)
     pdf = models.FileField(upload_to='quizzes/pdfs/')
