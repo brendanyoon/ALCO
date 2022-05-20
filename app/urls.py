@@ -6,6 +6,8 @@ urlpatterns = [
     path('prof-dashboard/', views.prof_dashboard, name='prof-dash'),
     path('student-dashboard/', views.student_dashboard, name='student-dash'),
     path('prof-quizzes/', views.prof_quizzes, name='prof-quizzes'),
+    # functioning prof-quizzes2 path that leads to broken code (needs to be edited)
+    path('prof-quizzes2/', views.prof_quizzes2, name='prof-quizzes2'),
     path('prof-map/', views.prof_map, name='prof-map'),
     path('prof-quest/', views.prof_quest, name='prof-quest'),
     path('student-stats/', views.student_stats, name='student-stats'),
@@ -13,6 +15,7 @@ urlpatterns = [
     path('student-quest/', views.student_quest, name='student-quest'),
     path('prof-quest-dashboard/', views.prof_quest_dashboard, name='prof-quest-dashboard'),
     path('prof-quest/quest/<str:quest_title>/', views.quest, name='quest'),
-    path('prof-quest/create-obstacle/<str:quest_title>/', views.create_obstacle, name='prof-obstacle-create')
+    path('prof-quest/create-obstacle/<str:quest_title>/', views.create_obstacle, name='prof-obstacle-create'),
+    path('student-fight/', views.student_fight, name='student-fight')
 ]
 

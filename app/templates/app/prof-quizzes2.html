@@ -1,0 +1,39 @@
+<!--nonfunctional model form attempt to display all quizzes -->
+{% extends "app/prof-base.html" %}
+
+{% block prof-content %}
+
+<div class="quiz-form">
+    <h2 style="font-family: Georgia">Quizzes</h2>
+    <h4 style="font-family: Georgia">Upload quizzes:</h4>
+    <br>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Upload Quiz</button>
+    </form>
+</div>
+
+
+<div class="display-all-quizzes">
+    <h2 style="font-family: Georgia">Display quizzes here</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for app_quiz in app_quizzes %}
+            <tr>
+                <td>{{ app_quiz.quizName }}</td>
+                <td>{{ app_quiz.pdf }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock prof-content %}

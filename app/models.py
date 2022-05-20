@@ -2,20 +2,28 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 
-string_max_length:int = 250
+string_max_length: int = 250
 description_max_length: int = 700
+
 
 class Professor(models.Model):
     professor_email = models.EmailField(max_length=string_max_length, primary_key=True)
     first_name = models.CharField(max_length=string_max_length)
     last_name = models.CharField(max_length=string_max_length)
 
+
 class Student(models.Model):
     student_email = models.EmailField(max_length=string_max_length, primary_key=True)
     first_name = models.CharField(max_length=string_max_length)
     last_name = models.CharField(max_length=string_max_length)
     grade = models.DecimalField(max_digits=5, decimal_places=3)
-    exp_pts = models.IntegerField()
+    exp_pts = models.IntegerField(default=0)
+
+    def exp(self):
+        return int(self.exp_pts)
+
+    def fname(self):
+        return str(self.first_name)
 
 class Quest(models.Model):
     title = models.CharField(max_length=string_max_length, primary_key=True)
@@ -41,6 +49,11 @@ class Multiple_Choice(models.Model):
     obstacle_id = models.ForeignKey(Obstacle, null=True, on_delete=models.CASCADE)
     num_choices = models.IntegerField()
     answer = models.TextField()
+    image1 = models.ImageField(upload_to='answers')
+    image2 = models.ImageField(upload_to='answers')
+    image3 = models.ImageField(upload_to='answers')
+    image4 = models.ImageField(upload_to='answers')
+
 
 class Multiple_Answers(models.Model):
     obstacle_id = models.ForeignKey(Obstacle, null=True, on_delete=models.CASCADE)
@@ -58,6 +71,7 @@ class Quest_Images(models.Model):
     obstacle_id = models.ForeignKey(Obstacle, null=True, on_delete=models.CASCADE)
     image = models.ImageField()
 
+
 class Completed_Quest(models.Model):
     quest = models.ForeignKey(Quest, on_delete=models.DO_NOTHING)
     student = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
@@ -65,5 +79,12 @@ class Completed_Quest(models.Model):
     exp_earned = models.IntegerField()
 
 
-    
+# Nonfunctioning Quiz model - to be updated for displaying quizzes in prof-quizzes.html
+class Quiz(models.Model):
+    quizName = models.CharField(max_length=string_max_length)
+    pdf = models.FileField(upload_to='quizzes/pdfs/')
+
+    def __str__(self):
+        return self.quizName
+
 

@@ -1,35 +1,75 @@
 {% extends "app/student-dashboard.html" %}
 
 {% block student-content %}
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-pause="true" style="font-family: Georgia">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
+                aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
+                aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
+                aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                aria-label="Slide 4"></button>
     </div>
     <div class="carousel-inner">
+        <h1>Which of the following State machines match the circuit and truth table above?</h1>
         <div class="carousel-item active">
-            <img src= "https://2minutetabletop.com/wp-content/uploads/2020/02/Arvyre-Continent-Map-23x16-Base-Map.jpg" class="d-block w-100" alt="...">
+            {% csrf_token %}
+<!--            to be implemented at a later time-->
+<!--            {{ question_form_student }}-->
+            {% load static %}
+            <img src="{% static 'images/answer1.png' %}">
+            <div class="carousel-caption">
+
+                <h3>21</h3>
+                <p>This one is probably correct</p>
+                <a class="btn btn-primary" href="#" role="button" style="width: 200px;">Select Answer</a>
+            </div>
+            <div>
+
+            </div>
+
+
+        </div>
+        <div class="carousel-item" >
+            {% load static %}
+            <img src="{% static 'images/answer2.png'%}">
+            <div class="carousel-caption">
+                <h3>910</h3>
+                <p>This one also looks right to me</p>
+                <a class="btn btn-primary" href="#" role="button" style="width: 200px;">Select Answer</a>
+            </div>
         </div>
         <div class="carousel-item">
-            <img src="../../media/Screen Shot 2022-04-26 at 8.39.39 PM.png" class="d-block w-100" alt="...">
+            {% load static %}
+            <img src="{% static 'images/answer3.png'%}">
+            <div class="carousel-caption">
+                <h3>19</h3>
+                <p>This one is probably wrong</p>
+                <a class="btn btn-primary" href="#" role="button" style="width: 200px;">Select Answer</a>
+            </div>
         </div>
         <div class="carousel-item">
-            <img src="../../media/Screen Shot 2022-03-07 at 10.12.17 PM.png" class="d-block w-100" alt="...">
+            {% load static %}
+            <img src="{% static 'images/answer4.png'%}">
+            <div class="carousel-caption">
+                <h3>19</h3>
+                <p>This one is probably wrong</p>
+                <a class="btn btn-primary" href="#" role="button" style="width: 200px;">Select Answer</a>
+            </div>
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="prev">
+            data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="next">
+            data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+
 {% endblock student-content %}
