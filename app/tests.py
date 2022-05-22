@@ -21,6 +21,7 @@ class HomePageTests(TestCase):
         self.assertTrue(html.startswith('<!DOCTYPE html>'))
         self.assertIn('<h1>ALCO RPG Login</h1>', html)
         self.assertTrue(html.endswith('</html>'))
+        
 
     def test_student_professor_login_buttons_exists(self):
         request = HttpRequest()
@@ -51,9 +52,9 @@ class ProfDashboardTests(TestCase):
         request = HttpRequest()
         response = prof_dashboard(request)
         html = response.content.decode('utf8')
-        self.assertIn('<a class="btn btn-primary" href="../prof-quizzes/" role="button">Quizzes</a>', html)
-        self.assertIn('<a class="btn btn-primary" href="#" role="button">Assignments</a>', html)
-        self.assertIn('<a class="btn btn-primary" href="#" role="button">Tests</a>', html)
+        self.assertIn('Map', html)
+        self.assertIn('Quest Creation', html)
+        self.assertIn('Image Upload', html)
 
     def prof_quizzes_page(self):
         found = resolve('prof-quizzes/')
@@ -87,14 +88,10 @@ class StudentDashboardTests(TestCase):
         response = student_dashboard(request)
         html = response.content.decode('utf8')
         self.assertTrue(html.endswith('</html>'))
-        self.assertIn('Student Dashboard', html)
         self.assertIn('Home',html)
         self.assertIn('Map', html)
-        self.assertIn('Tests', html)
-        self.assertIn('Assignments', html)
+        self.assertIn('Quest List', html)
         self.assertIn('Stats', html)
-        self.assertIn('This quiz is the hardest quiz you will ever take in your life', html)
-
 
 class ExperienceFrontEndTest(TestCase):
     def test_student_experience_resolves_to_correct_view(self):
@@ -153,3 +150,5 @@ class ModelsTest(TestCase):
         quest.save()
         assert(Quest.objects.get(title='New Quest') == quest)
         
+    def sample_question(self):
+        num_questions = Multiple_Choice(num_choices)

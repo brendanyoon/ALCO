@@ -1,0 +1,45 @@
+{% extends "app/prof-base.html" %}
+
+{% block prof-content %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <h5>Existing Quests</h5>
+    <hr>
+    <div class="card card-body">
+        <table class="table table-hover">
+            <tr>
+                <th>Quest Name</th>
+                <th>Edit</th>
+            </tr>
+
+            {% for quest in all_quests %}
+            <tr>
+                <td>{{quest.title}}</td>
+                <td><a class="btn btn-sm btn-info" href="{% url 'quest' quest.title %}">Edit</a></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+<br>
+<div class="row">
+    <h5>Create New Quest</h5>
+    <hr>
+    <div class="row">
+        <div class="card card-body">
+            <form class="quest-create-form form-group row g-3" method="POST">
+                {% csrf_token %}
+                {{ quest_create_form | crispy }}
+                <button type="submit" class="save btn btn-primary">Save</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+{% endblock prof-content %}

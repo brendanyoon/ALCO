@@ -1,0 +1,62 @@
+{% extends "app/prof-base.html" %}
+
+{% block prof-content %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<h5>Obstacle Creation:</h5>
+			<hr>
+			<a class="btn btn-outline-info  btn-md btn-block" href="">Update Quest</a>
+			<a class="btn btn-outline-info  btn-md btn-block" href="{% url 'prof-obstacle-create' quest.title%}">Create New Obstacle</a>
+
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="card card-body">
+			<h5>Quest Information</h5>
+			<hr>
+			<p>Total Obstacles: </p>
+			<p>Total Exp: {{quest.total_exp}}</p>
+		</div>
+	</div>
+
+</div>
+
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Question</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for obstacle in all_obstacles %}
+                    <tr>
+
+                        <td>{{ obstacle.obstacle_id }}</td>
+                        <td>{{ obstacle.obstacle_type }}</td>
+                        <td><a class="btn btn-sm btn-info" href="">Update</a></td>
+						<td><a class="btn btn-sm btn-danger" href="">Delete</a></td>
+                    
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+            </table>
+		</div>
+	</div>
+</div>
+
+
+{% endblock prof-content %}
